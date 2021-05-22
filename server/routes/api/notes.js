@@ -54,7 +54,9 @@ router.delete("/:topicName/notes/:id",(req,res)=>{
         if(err) res.send(err);
         else if(!topic) res.send("This topic has no notes")
         else{
+            
             const id = req.params.id;
+            console.log("here "+id);
             var notes =topic.notes;
             notes = notes.filter(note=>note.id!=id)
             Topic.updateOne({name:topic.name},{notes:notes},(err)=>{

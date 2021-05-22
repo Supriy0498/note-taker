@@ -3,9 +3,11 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const notes = require("./routes/api/notes.js");
 const topics = require("./routes/api/topics.js");
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, 'build')));
 
 const PORT = process.env.PORT || 8080;
 
@@ -24,6 +26,10 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get("/",(req,res)=>{
     res.send("Helllooo worldoo");

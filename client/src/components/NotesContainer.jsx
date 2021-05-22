@@ -40,6 +40,8 @@ export default function NotesContainer() {
             {notes.map((note,index)=>
                 <Note 
                 key={index} 
+                id={note._id}
+                topicName={topic}
                 title={note.title}
                 content={note.content}
                 updateNotes={getNotes}
